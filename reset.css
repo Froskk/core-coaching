@@ -8,6 +8,11 @@ html {
   box-sizing: inherit;
 }
 
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 body,
 h1,
 h2,
