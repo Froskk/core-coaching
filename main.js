@@ -57,7 +57,29 @@ const alterClass = data => {
   }
 };
 
+const setViewportSize = () => {
+  const vh = window.innerHeight * 0.01;
+  const vw = window.innerWidth * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+  document.documentElement.style.setProperty("--vw", `${vw}px`);
+};
+
 window.onload = () => {
-  const backgroundPan = setInterval(() => iterateTimings(timings), 30000);
-  iterateTimings(timings);
+  setViewportSize();
+
+  const hash = window.location.hash.replace("#", "");
+  const footer = document.querySelector(".footer");
+
+  if (hash.length !== 0 && hash !== "home") {
+    if (document.getElementById(hash))
+      document.getElementById(hash).classList.add("active");
+    footer.querySelector(`.${hash}`).classList.add("slider");
+  } else {
+    footer.querySelector(".home").classList.add("slider");
+    const backgroundPan = setInterval(() => iterateTimings(timings), 30000);
+    iterateTimings(timings);
+  }
+
+  // TODO: if Phone/Tablet, enable this
+  // window.addEventListener("resize", () => setViewportSize());
 };
